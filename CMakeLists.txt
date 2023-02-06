@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.5)
 project(boost_sml_vendor)
 
+
 find_package(ament_cmake REQUIRED)
+
+include(ExternalProject)
 
 ExternalProject_Add(boost_sml
   PREFIX boost_sml
