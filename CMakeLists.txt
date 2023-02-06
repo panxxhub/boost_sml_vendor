@@ -8,8 +8,8 @@ include(ExternalProject)
 
 ExternalProject_Add(boost_sml
   PREFIX boost_sml
-  URL https://github.com/boost-ext/sml/archive/refs/tags/v1.1.6.tar.gz
-  URL_HASH MD5=b0432dce0645637881da5848791fdf18
+  GIT_REPOSITORY https://github.com/boost-ext/sml.git
+  GIT_TAG v1.1.6
   CMAKE_ARGS
    -DSML_BUILD_BENCHMARKS=OFF
    -DSML_BUILD_EXAMPLES=OFF
@@ -19,8 +19,5 @@ ExternalProject_Add(boost_sml
   INSTALL_DIR "${CMAKE_CURRENT_BINARY_DIR}/boost_sml_install"
 )
 install (DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/boost_sml_install DESTINATION ${CMAKE_INSTALL_PREFIX})
-
-   
-install(DIRECTORY cmake DESTINATION share/${PROJECT_NAME})
 
 ament_package()
