@@ -1,23 +1,22 @@
 cmake_minimum_required(VERSION 3.5)
 project(boost_sml_vendor)
 
-
 find_package(ament_cmake REQUIRED)
 
-include(ExternalProject)
+set(SML_BUILD_BENCHMARKS OFF CACHE BOOL "Build benchmarks")
+set(SML_BUILD_EXAMPLES   OFF CACHE BOOL "Build examples")
+set(SML_BUILD_TESTS      OFF CACHE BOOL "Build tests")
+set(SML_USE_EXCEPTIONS   ON  CACHE BOOL "Do not disable exceptions")
 
-ExternalProject_Add(boost_sml
-  PREFIX boost_sml
-  GIT_REPOSITORY https://github.com/boost-ext/sml.git
+
+include(FetchContent)
+FetchContent_Declare(
+  SML
+  GIT_REPOSITORY https://github.com/boost-ext/sml
   GIT_TAG v1.1.6
-  CMAKE_ARGS
-   -DSML_BUILD_BENCHMARKS=OFF
-   -DSML_BUILD_EXAMPLES=OFF
-   -DSML_BUILD_TESTS=OFF
-   -DSML_USE_EXCEPTIONS=ON
-   -DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/boost_sml_install
-  INSTALL_DIR "${CMAKE_CURRENT_BINARY_DIR}/boost_sml_install"
 )
-install (DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/boost_sml_install DESTINATION ${CMAKE_INSTALL_PREFIX})
+FetchContent_MakeAvailable(SML)
+
+ament_export_include_directories(include)
 
 ament_package()
